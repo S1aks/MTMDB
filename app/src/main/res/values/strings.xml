@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MTMDB</string>
+    <string name="reload">Обновить</string>
 </resources>
