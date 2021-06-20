@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/card_elements_padding">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/moviePoster"
+                android:layout_width="@dimen/poster_big_width"
+                android:layout_height="@dimen/poster_big_height"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@id/labelMovieOverview"
+                app:layout_constraintEnd_toStartOf="@id/movieDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                tools:srcCompat="@drawable/conjuring" />
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_elements_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/moviePoster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title of movie" />
+
+            <TextView
+                android:id="@+id/labelMovieDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_elements_padding"
+                android:text="@string/label_movie_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/date_text_size"
+                app:layout_constraintBottom_toTopOf="@id/movieDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/moviePoster"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle" />
+
+            <TextView
+                android:id="@+id/movieDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="@dimen/card_elements_padding"
+                android:textSize="@dimen/date_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/moviePoster"
+                app:layout_constraintTop_toBottomOf="@id/labelMovieDate"
+                tools:text="12.05.2015" />
+
+            <TextView
+                android:id="@+id/labelMovieOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_elements_padding"
+                android:text="@string/label_overview"
+                android:textColor="@color/black"
+                android:textSize="@dimen/overview_text_size"
+                app:layout_constraintBottom_toTopOf="@id/movieOverview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moviePoster" />
+
+            <TextView
+                android:id="@+id/movieOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_elements_padding"
+                android:textSize="@dimen/overview_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelMovieOverview" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</FrameLayout>
