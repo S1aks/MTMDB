@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.s1aks.mtmdb.databinding.MainFragmentRecyclerItemBinding
-import ru.s1aks.mtmdb.framework.ui.main.MainFragment
+import ru.s1aks.mtmdb.databinding.FragmentMainTopRecyclerItemBinding
+import ru.s1aks.mtmdb.framework.ui.main_fragment.MainFragment
 import ru.s1aks.mtmdb.model.entities.Movie
 
-class MainFragmentAdapter(private var itemClickListener: MainFragment.OnItemViewClickListener?) :
-    RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
+class MainFragmentAdapterTop(private var itemClickListener: MainFragment.OnItemViewClickListener?) :
+    RecyclerView.Adapter<MainFragmentAdapterTop.MainViewHolder>() {
     private var moviesData: List<Movie> = listOf()
-    private lateinit var binding: MainFragmentRecyclerItemBinding
+    private lateinit var binding: FragmentMainTopRecyclerItemBinding
 
     fun setMovies(data: List<Movie>) {
         moviesData = data
@@ -22,7 +22,7 @@ class MainFragmentAdapter(private var itemClickListener: MainFragment.OnItemView
         parent: ViewGroup,
         viewType: Int
     ): MainViewHolder {
-        binding = MainFragmentRecyclerItemBinding.inflate(
+        binding = FragmentMainTopRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return MainViewHolder(binding.root)
@@ -40,7 +40,6 @@ class MainFragmentAdapter(private var itemClickListener: MainFragment.OnItemView
         fun bind(movie: Movie) = with(binding) {
             moviePoster.setImageResource(movie.imageId)
             movieTitle.text = movie.title
-            movieDate.text = movie.date
             root.setOnClickListener { itemClickListener?.onItemViewClick(movie) }
         }
     }
