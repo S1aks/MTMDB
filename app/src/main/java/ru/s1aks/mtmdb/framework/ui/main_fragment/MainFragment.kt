@@ -90,10 +90,13 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 mainFragmentLoadingLayout.visibility = View.GONE
-                Snackbar
-                    .make(binding.mainFragmentLayout, appState.error.localizedMessage!!, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(R.string.reload)) { viewModel.getData() }
-                    .show()
+                appState.error.localizedMessage?.let {
+                    mainFragmentLayout.showSnackBar(
+                        it,
+                        getString(R.string.reload),
+                        { viewModel.getData() })
+                }
+
             }
         }
     }
@@ -101,6 +104,24 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun View.showSnackBar(
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
+    }
+
+    private fun View.showSnackBarFromR(
+        textId: Int,
+        actionTextId: Int,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, getString(textId), length).setAction(getString(actionTextId), action).show()
     }
 
     interface OnItemViewClickListener {

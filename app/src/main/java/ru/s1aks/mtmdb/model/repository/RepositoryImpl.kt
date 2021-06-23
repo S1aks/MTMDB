@@ -5,10 +5,7 @@ import ru.s1aks.mtmdb.model.entities.getNewMovies
 import ru.s1aks.mtmdb.model.entities.getTopMovies
 
 class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie {
-        return Movie()
-    }
-
+    override fun getMovieFromServer() = Movie()
     override fun getNewMovieFromLocalStorage() = getNewMovies()
     override fun getTopMovieFromLocalStorage() = getTopMovies()
 }
