@@ -91,10 +91,9 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 mainFragmentLoadingLayout.visibility = View.GONE
                 appState.error.localizedMessage?.let {
-                    mainFragmentLayout.showSnackBar(
+                    mainFragmentLayout.showErrorSnackBar(
                         it,
-                        getString(R.string.reload),
-                        { viewModel.getData() })
+                        getString(R.string.reload))
                 }
 
             }
@@ -106,22 +105,24 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    private fun View.showSnackBar(
+    private fun View.showErrorSnackBar(
         text: String,
         actionText: String,
-        action: (View) -> Unit,
         length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
-        Snackbar.make(this, text, length).setAction(actionText, action).show()
+        Snackbar.make(this, text, length)
+            .setAction(actionText) { viewModel.getData() }
+            .show()
     }
 
-    private fun View.showSnackBarFromR(
+    private fun View.showErrorSnackBarFromR(
         textId: Int,
         actionTextId: Int,
-        action: (View) -> Unit,
         length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
-        Snackbar.make(this, getString(textId), length).setAction(getString(actionTextId), action).show()
+        Snackbar.make(this, getString(textId), length)
+            .setAction(getString(actionTextId)) { viewModel.getData() }
+            .show()
     }
 
     interface OnItemViewClickListener {
