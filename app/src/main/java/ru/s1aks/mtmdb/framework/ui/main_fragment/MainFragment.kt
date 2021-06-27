@@ -115,16 +115,6 @@ class MainFragment : Fragment() {
             .show()
     }
 
-    private fun View.showErrorSnackBarFromR(
-        textId: Int,
-        actionTextId: Int,
-        length: Int = Snackbar.LENGTH_INDEFINITE
-    ) {
-        Snackbar.make(this, getString(textId), length)
-            .setAction(getString(actionTextId)) { viewModel.getData() }
-            .show()
-    }
-
     interface OnItemViewClickListener {
         fun onItemViewClick(movie: Movie)
     }

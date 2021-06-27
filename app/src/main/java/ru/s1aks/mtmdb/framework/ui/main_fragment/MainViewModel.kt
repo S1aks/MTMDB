@@ -1,12 +1,10 @@
 package ru.s1aks.mtmdb.framework.ui.main_fragment
 
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
 import ru.s1aks.mtmdb.model.AppState
 import ru.s1aks.mtmdb.model.repository.Repository
 import java.lang.Thread.sleep
-import kotlin.random.Random
 
 class MainViewModel(private val repository: Repository) : ViewModel(), LifecycleObserver {
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -17,17 +15,13 @@ class MainViewModel(private val repository: Repository) : ViewModel(), Lifecycle
     private fun getNewDataFromLocalSource() {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(2000)
+            sleep(1000)
             try {
-                when (Random.nextInt(5)) {
-                    0 -> liveDataToObserve.postValue(
+                liveDataToObserve.postValue(
                         AppState.Success(
-                            repository.getNewMovieFromLocalStorage(),
-                            repository.getTopMovieFromLocalStorage()
+                            repository.getNewMoviesFromServer(),
+                            repository.getTopMoviesFromServer()
                         ))
-                    1 -> throw Exception("No connect with server!")
-                    else -> throw Exception("Error download data!")
-                }
             } catch (ex: Exception) {
                 liveDataToObserve.postValue(
                     AppState.Error(
@@ -36,5 +30,10 @@ class MainViewModel(private val repository: Repository) : ViewModel(), Lifecycle
             }
 
         }.start()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onViewStart() {
+        Log.i("LifecycleEvent", "onStart")
     }
 }
