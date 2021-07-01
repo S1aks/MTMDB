@@ -1,5 +1,6 @@
 package ru.s1aks.mtmdb.framework.ui.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,9 @@ class MainFragmentAdapterTop(private var itemClickListener: MainFragment.OnItemV
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) = with(binding) {
-            moviePoster.setImageResource(movie.imageId)
+            val imgUri: Uri =
+                Uri.parse("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path)
+            moviePoster.setImageURI(imgUri)
             movieTitle.text = movie.title
             root.setOnClickListener { itemClickListener?.onItemViewClick(movie) }
         }
