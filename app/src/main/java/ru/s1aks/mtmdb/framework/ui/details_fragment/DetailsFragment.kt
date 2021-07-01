@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.s1aks.mtmdb.R
 import ru.s1aks.mtmdb.databinding.FragmentDetailsBinding
 import ru.s1aks.mtmdb.model.AppState
 import ru.s1aks.mtmdb.model.entities.Movie
@@ -29,9 +30,7 @@ class DetailsFragment : Fragment() {
         arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let {
             movieTitle.text = it.title
             movieDate.text = it.release_date
-            val imgUri: Uri =
-                Uri.parse("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + it.poster_path)
-            moviePoster.setImageURI(imgUri)
+            moviePoster.setImageResource(R.drawable.ic_launcher_foreground)
             viewModel.liveDataToObserve.observe(viewLifecycleOwner, { appState ->
                 when (appState) {
                     is AppState.Error -> {

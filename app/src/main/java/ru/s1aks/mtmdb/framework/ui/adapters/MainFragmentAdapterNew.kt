@@ -1,10 +1,10 @@
 package ru.s1aks.mtmdb.framework.ui.adapters
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.s1aks.mtmdb.R
 import ru.s1aks.mtmdb.databinding.FragmentMainNewRecyclerItemBinding
 import ru.s1aks.mtmdb.framework.ui.main_fragment.MainFragment
 import ru.s1aks.mtmdb.model.entities.Movie
@@ -21,7 +21,7 @@ class MainFragmentAdapterNew(private var itemClickListener: MainFragment.OnItemV
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): MainViewHolder {
         binding = FragmentMainNewRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -31,15 +31,14 @@ class MainFragmentAdapterNew(private var itemClickListener: MainFragment.OnItemV
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(moviesData[position])
+        holder.setIsRecyclable(false)
     }
 
     override fun getItemCount(): Int = moviesData.size
 
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(movie: Movie) = with(binding) {
-            val imgUri: Uri =
-                Uri.parse("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path)
-            moviePoster.setImageURI(imgUri)
+            moviePoster.setImageResource(R.drawable.ic_launcher_foreground)
             movieTitle.text = movie.title
             movieDate.text = movie.release_date
             root.setOnClickListener { itemClickListener?.onItemViewClick(movie) }

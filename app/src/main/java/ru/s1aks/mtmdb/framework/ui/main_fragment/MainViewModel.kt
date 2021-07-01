@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.*
 import ru.s1aks.mtmdb.model.AppState
 import ru.s1aks.mtmdb.model.repository.Repository
-import java.lang.Thread.sleep
 
 class MainViewModel(private val repository: Repository) : ViewModel(), LifecycleObserver {
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -15,18 +14,17 @@ class MainViewModel(private val repository: Repository) : ViewModel(), Lifecycle
     private fun getNewDataFromLocalSource() {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(1000)
             try {
                 liveDataToObserve.postValue(
-                        AppState.Success(
-                            repository.getNewMoviesFromServer(),
-                            repository.getTopMoviesFromServer()
-                        ))
+                    AppState.Success(
+                        repository.getNewMoviesFromServer(),
+                        repository.getTopMoviesFromServer()
+                    ))
             } catch (ex: Exception) {
                 liveDataToObserve.postValue(
                     AppState.Error(
-                    error = ex
-                ))
+                        error = ex
+                    ))
             }
 
         }.start()
