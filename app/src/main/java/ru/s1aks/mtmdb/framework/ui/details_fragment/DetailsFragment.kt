@@ -1,6 +1,5 @@
 package ru.s1aks.mtmdb.framework.ui.details_fragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
