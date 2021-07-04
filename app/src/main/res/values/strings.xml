@@ -3,6 +3,4 @@
     <string name="reload">Обновить</string>
     <string name="label_movie_date">Дата выхода:</string>
     <string name="label_overview">Описание:</string>
-    <string name="label_top">Топ просмотров</string>
-    <string name="label_new">Новые фильмы</string>
 </resources>
