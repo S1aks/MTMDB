@@ -1,9 +1,16 @@
 package ru.s1aks.mtmdb.model.repository
 
 import ru.s1aks.mtmdb.model.entities.Movie
+import ru.s1aks.mtmdb.model.entities.MoviesList
 
 interface Repository {
-    fun getMovieFromServer(id: Int): Movie
-    fun getNewMoviesFromServer(): List<Movie>
-    fun getTopMoviesFromServer(): List<Movie>
+
+    fun getNewMoviesListFromServer(
+        callback: retrofit2.Callback<MoviesList>
+    )
+
+    fun getMovieDetailsFromServer(
+        id: Int,
+        callback: retrofit2.Callback<Movie>
+    )
 }

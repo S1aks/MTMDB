@@ -7,59 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".framework.ui.main_fragment.MainFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
+    <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewNew"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/label_new"
-                android:textSize="32sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mainFragmentRecyclerViewNew"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/mainFragmentRecyclerViewTop"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="5"
-                tools:listitem="@layout/fragment_main_new_recycler_item" />
+                tools:listitem="@layout/fragment_main_recycler_item" />
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/label_top"
-                android:textSize="32sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mainFragmentRecyclerViewTop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mainFragmentRecyclerViewNew"
-                tools:itemCount="5"
-                tools:listitem="@layout/fragment_main_top_recycler_item" />
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
-        android:id="@+id/mainFragmentLoadingLayout"
+        android:id="@+id/LoadingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
