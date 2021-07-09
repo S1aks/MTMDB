@@ -3,6 +3,9 @@ package ru.s1aks.mtmdb.framework.ui.main_fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,12 +15,14 @@ import ru.s1aks.mtmdb.model.repository.*
 
 class MainViewModel(
     private val repository: RepositoryImpl = RepositoryImpl(RemoteDataSource()),
-) : ViewModel(), LifecycleObserver {
+) : ViewModel(), LifecycleObserver, CoroutineScope by MainScope() {
     val liveData: MutableLiveData<AppState> = MutableLiveData()
 
     fun getNewDataFromServer() {
-        liveData.value = AppState.Loading
-        repository.getNewMoviesListFromServer(callback)
+        launch {
+            liveData.value = AppState.Loading
+            repository.getNewMoviesListFromServer(callback)
+        }
     }
 
     private val callback = object :

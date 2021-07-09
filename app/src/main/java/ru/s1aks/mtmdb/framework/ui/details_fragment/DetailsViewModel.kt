@@ -7,17 +7,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.s1aks.mtmdb.model.AppState
+import ru.s1aks.mtmdb.model.entities.History
 import ru.s1aks.mtmdb.model.entities.Movie
 import ru.s1aks.mtmdb.model.repository.*
 
 class DetailsViewModel(
-    private val repository: RepositoryImpl = RepositoryImpl(RemoteDataSource())
-) : ViewModel(), LifecycleObserver {
+    private val repository: RepositoryImpl = RepositoryImpl(RemoteDataSource()),
+) : ViewModel(), LifecycleObserver{
     val liveData: MutableLiveData<AppState> = MutableLiveData()
 
     fun getMovieFromRemoteSource(id: Int) {
         liveData.value = AppState.Loading
         repository.getMovieDetailsFromServer(id, callback)
+    }
+
+    fun saveToHistory(history: History) {
+        repository.saveToHistory(history)
     }
 
     private val callback = object :

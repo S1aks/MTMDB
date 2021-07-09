@@ -11,4 +11,6 @@
     <dimen name="overview_text_size">25sp</dimen>
     <dimen name="poster_width">160dp</dimen>
     <dimen name="card_view_height">200dp</dimen>
+    <dimen name="settings_view_padding">20dp</dimen>
+    <dimen name="settings_text_size">20sp</dimen>
 </resources>
