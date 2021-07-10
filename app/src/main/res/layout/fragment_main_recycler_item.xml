@@ -5,7 +5,9 @@
     android:id="@+id/itemContainer"
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_view_height"
-    android:layout_margin="@dimen/card_view_margin"
+    android:layout_marginStart="@dimen/card_view_margin"
+    android:layout_marginTop="@dimen/card_view_margin"
+    android:layout_marginEnd="@dimen/card_view_margin"
     android:padding="@dimen/card_elements_padding"
     app:cardCornerRadius="@dimen/card_view_corner_radius"
     app:cardElevation="@dimen/card_view_card_elevation">

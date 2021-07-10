@@ -9,7 +9,8 @@ import ru.s1aks.mtmdb.model.entities.Movie
 import ru.s1aks.mtmdb.model.entities.MoviesList
 
 const val BASE_URL = "https://api.themoviedb.org/"
-const val LOCALE = "ru-Ru"
+const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+const val LOCALE = "ru"
 const val NEW_LIST_CATEGORY = "now_playing"
 const val TOP_LIST_CATEGORY = "top_rated"
 const val SERVER_ERROR = "Ошибка сервера"

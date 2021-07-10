@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsFragmentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/settings_view_padding"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".framework.ui.settings_fragment.SettingsFragment">
+
+    <CheckBox
+        android:id="@+id/adultCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_adult_check_text"
+        android:textSize="@dimen/settings_text_size" />
+
+</LinearLayout>

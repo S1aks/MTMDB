@@ -3,4 +3,9 @@
     <string name="reload">Обновить</string>
     <string name="label_movie_date">Дата выхода:</string>
     <string name="label_overview">Описание:</string>
+    <string name="menuFavorite">Избранное</string>
+    <string name="menuSettings">Настройки</string>
+    <string name="menuSearch">Поиск</string>
+    <string name="settings_adult_check_text">Показывать фильмы для взрослых</string>
+    <string name="menuHistory">История</string>
 </resources>
