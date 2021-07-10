@@ -19,6 +19,11 @@
         android:title="@string/menuFavorite"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/actionContacts"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="@string/contacts"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/actionSearch"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="5"

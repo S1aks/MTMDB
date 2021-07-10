@@ -8,4 +8,6 @@
     <string name="menuSearch">Поиск</string>
     <string name="settings_adult_check_text">Показывать фильмы для взрослых</string>
     <string name="menuHistory">История</string>
+    <string name="contacts">Контакты</string>
+    <string name="read_contacts_toast_text">Необходимо предоставить разрешение для чтения контактов</string>
 </resources>

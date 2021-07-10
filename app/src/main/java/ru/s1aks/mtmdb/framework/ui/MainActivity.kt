@@ -11,6 +11,7 @@ import ru.s1aks.mtmdb.R
 import ru.s1aks.mtmdb.framework.ui.main_fragment.MainFragment
 import ru.s1aks.mtmdb.framework.ui.settings_fragment.SettingsFragment
 import ru.s1aks.mtmdb.framework.AppSettings
+import ru.s1aks.mtmdb.framework.ui.contacts_fragment.ContactsFragment
 import ru.s1aks.mtmdb.framework.ui.history_fragment.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
@@ -52,6 +53,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.actionHistory -> {
                 openFragment(HistoryFragment.newInstance())
+                true
+            }
+            R.id.actionContacts -> {
+                openFragment(ContactsFragment.newInstance())
                 true
             }
             R.id.actionFavorites -> {
