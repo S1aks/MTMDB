@@ -1,8 +1,7 @@
 package ru.s1aks.mtmdb.model.repository
 
-import ru.s1aks.mtmdb.model.entities.History
-import ru.s1aks.mtmdb.model.entities.Movie
-import ru.s1aks.mtmdb.model.entities.MoviesList
+import retrofit2.Callback
+import ru.s1aks.mtmdb.model.entities.*
 
 interface Repository {
     fun getNewMoviesListFromServer(
@@ -17,4 +16,6 @@ interface Repository {
     fun saveToHistory(history: History)
 
     fun getAllHistory(): List<History>
+    fun getCreditsFromServer(id: Int, callback: Callback<Credits>)
+    fun getPersonFromServer(id: Int, callback: Callback<Person>)
 }

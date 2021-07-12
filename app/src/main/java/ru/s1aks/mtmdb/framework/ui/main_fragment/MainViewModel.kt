@@ -9,18 +9,18 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import ru.s1aks.mtmdb.model.AppState
+import ru.s1aks.mtmdb.model.MovieState
 import ru.s1aks.mtmdb.model.entities.MoviesList
 import ru.s1aks.mtmdb.model.repository.*
 
 class MainViewModel(
     private val repository: RepositoryImpl = RepositoryImpl(RemoteDataSource()),
 ) : ViewModel(), LifecycleObserver, CoroutineScope by MainScope() {
-    val liveData: MutableLiveData<AppState> = MutableLiveData()
+    val liveData: MutableLiveData<MovieState> = MutableLiveData()
 
     fun getNewDataFromServer() {
         launch {
-            liveData.value = AppState.Loading
+            liveData.value = MovieState.Loading
             repository.getNewMoviesListFromServer(callback)
         }
     }
@@ -33,17 +33,17 @@ class MainViewModel(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
                 } else {
-                    AppState.Error(Throwable(SERVER_ERROR))
+                    MovieState.Error(Throwable(SERVER_ERROR))
                 }
             )
         }
 
         override fun onFailure(call: Call<MoviesList>, t: Throwable) {
-            liveData.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
+            liveData.postValue(MovieState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
 
-        private fun checkResponse(serverResponse: MoviesList): AppState {
-            return AppState.Success(serverResponse.results)
+        private fun checkResponse(serverResponse: MoviesList): MovieState {
+            return MovieState.Success(serverResponse.results)
         }
     }
 }

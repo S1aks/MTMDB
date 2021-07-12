@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ru.s1aks.mtmdb">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:name=".framework.App"
         android:allowBackup="true"
@@ -12,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MTMDB"
         tools:ignore="AllowBackup">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCdcr6UG8V9R76Idw9iMHBga9t-8BqpO2o" />
         <activity android:name=".framework.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,7 +17,11 @@ import org.koin.core.parameter.parametersOf
 import ru.s1aks.mtmdb.R
 import ru.s1aks.mtmdb.databinding.FragmentDetailsBinding
 import ru.s1aks.mtmdb.framework.AppSettings
-import ru.s1aks.mtmdb.model.AppState
+import ru.s1aks.mtmdb.framework.ui.adapters.CreditsDetailsFragmentAdapter
+import ru.s1aks.mtmdb.framework.ui.person_fragment.PersonFragment
+import ru.s1aks.mtmdb.model.CreditsState
+import ru.s1aks.mtmdb.model.MovieState
+import ru.s1aks.mtmdb.model.entities.Cast
 import ru.s1aks.mtmdb.model.entities.History
 import ru.s1aks.mtmdb.model.repository.BASE_IMAGE_URL
 import ru.s1aks.mtmdb.model.repository.RemoteDataSource
@@ -33,6 +37,7 @@ class DetailsFragment : Fragment(), CoroutineScope by MainScope() {
         parametersOf(RepositoryImpl(RemoteDataSource()))
     }
     private var movieId: Int = 0
+    private var adapter: CreditsDetailsFragmentAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,31 +51,64 @@ class DetailsFragment : Fragment(), CoroutineScope by MainScope() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getInt(BUNDLE_EXTRA, DEF_INT_VAL)?.let {
             movieId = it
+            movieCastRecyclerView.adapter = adapter
             viewModel.liveData.observe(viewLifecycleOwner, { appState ->
                 renderData(appState)
             })
+            viewModel.creditsLiveData.observe(viewLifecycleOwner, { creditState ->
+                initAdapter(creditState)
+            })
             viewModel.getMovieFromRemoteSource(it)
+            viewModel.getCredits(it)
+        }
+    }
+
+    private fun initAdapter(creditState: CreditsState?) {
+        when (creditState) {
+            is CreditsState.Success -> {
+                adapter = CreditsDetailsFragmentAdapter(object : OnItemViewClickListener {
+                    override fun onItemViewClick(cast: Cast) {
+                        val fragmentManager = activity?.supportFragmentManager
+                        fragmentManager?.let { manager ->
+                            val bundle = Bundle().apply {
+                                putInt(PersonFragment.BUNDLE_EXTRA, cast.id)
+                            }
+                            manager.beginTransaction()
+                                .replace(R.id.container, PersonFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                }).apply {
+                    setData(creditState.creditsData)
+                }
+                binding.movieCastRecyclerView.adapter = adapter
+            }
+            is CreditsState.Error -> {
+
+            }
         }
     }
 
     @SuppressLint("SimpleDateFormat", "NewApi")
-    private fun renderData(appState: AppState) = with(binding) {
-        when (appState) {
-            is AppState.Loading ->
+    private fun renderData(movieState: MovieState) = with(binding) {
+        when (movieState) {
+            is MovieState.Loading ->
                 loadingLayout.visibility = View.VISIBLE
-            is AppState.Success -> {
+            is MovieState.Success -> {
                 loadingLayout.visibility = View.GONE
-                movieTitle.text = appState.moviesData.first().title
-                movieDate.text = appState.moviesData.first().release_date
+                movieTitle.text = movieState.moviesData.first().title
+                movieDate.text = movieState.moviesData.first().release_date
                 moviePoster.load(BASE_IMAGE_URL
-                        + appState.moviesData[0].poster_path)
-                movieOverview.text = appState.moviesData.first().overview
+                        + movieState.moviesData[0].poster_path)
+                movieOverview.text = movieState.moviesData.first().overview
                 launch(Dispatchers.IO) {
                     try {
                         viewModel.saveToHistory(History(
-                            appState.moviesData.first().id,
-                            appState.moviesData.first().title,
-                            LocalDateTime.now().format(DateTimeFormatter.ofPattern(AppSettings.DATE_TIME_FORMAT_PATTERN))
+                            movieState.moviesData.first().id,
+                            movieState.moviesData.first().title,
+                            LocalDateTime.now()
+                                .format(DateTimeFormatter.ofPattern(AppSettings.DATE_TIME_FORMAT_PATTERN))
                         ))
                     } catch (exception: Exception) {
                         Log.d("ERROR", "Error load from DB:" + exception.localizedMessage)
@@ -78,9 +116,9 @@ class DetailsFragment : Fragment(), CoroutineScope by MainScope() {
 
                 }
             }
-            is AppState.Error -> {
+            is MovieState.Error -> {
                 loadingLayout.visibility = View.GONE
-                appState.error.localizedMessage?.let {
+                movieState.error.localizedMessage?.let {
                     view?.showSnackBar(
                         it,
                         getString(R.string.reload),
@@ -89,6 +127,10 @@ class DetailsFragment : Fragment(), CoroutineScope by MainScope() {
                 }
             }
         }
+    }
+
+    interface OnItemViewClickListener {
+        fun onItemViewClick(cast: Cast)
     }
 
     companion object {
