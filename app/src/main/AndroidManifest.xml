@@ -13,9 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MTMDB"
         tools:ignore="AllowBackup">
+        <service
+            android:name=".framework.services.MessagingService"
+            android:permission="android.permission.FOREGROUND_SERVICE">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCdcr6UG8V9R76Idw9iMHBga9t-8BqpO2o" />
+            android:value="AIzaSyAFR9wY6EDL6VCEaNQzHHT-4G0MnT4gQ3M" />
         <activity android:name=".framework.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

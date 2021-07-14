@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -50,6 +51,7 @@ android {
 
 dependencies {
     //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
@@ -78,12 +80,15 @@ dependencies {
 
     //Room
     implementation 'androidx.room:room-runtime:2.3.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt 'androidx.room:room-compiler:2.3.0'
+
+    //Firebase messaging
+    implementation 'com.google.firebase:firebase-messaging-ktx:22.0.0'
 
     //Google map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Test
     testImplementation 'junit:junit:4.13.2'

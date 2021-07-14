@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "890134413791",
+    "project_id": "mtmdb-add8c",
+    "storage_bucket": "mtmdb-add8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890134413791:android:a8070d85a0b35c54adc46a",
+        "android_client_info": {
+          "package_name": "ru.s1aks.mtmdb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890134413791-5fvmdvuako3g2rt62fnkloo12okgnit2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfRUvQU1gBET4yq27XRt4LxwbeoNZ2goM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890134413791-5fvmdvuako3g2rt62fnkloo12okgnit2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
