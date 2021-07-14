@@ -3,9 +3,7 @@ package ru.s1aks.mtmdb.model.repository
 import retrofit2.Callback
 import ru.s1aks.mtmdb.model.database.Database
 import ru.s1aks.mtmdb.model.database.HistoryEntity
-import ru.s1aks.mtmdb.model.entities.History
-import ru.s1aks.mtmdb.model.entities.Movie
-import ru.s1aks.mtmdb.model.entities.MoviesList
+import ru.s1aks.mtmdb.model.entities.*
 
 class RepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
@@ -17,6 +15,14 @@ class RepositoryImpl(
 
     override fun getMovieDetailsFromServer(id: Int, callback: Callback<Movie>) {
         remoteDataSource.getMovieDetails(id, callback)
+    }
+
+    override fun getCreditsFromServer(id: Int, callback: Callback<Credits>) {
+        remoteDataSource.getCredits(id, callback)
+    }
+
+    override fun getPersonFromServer(id: Int, callback: Callback<Person>) {
+        remoteDataSource.getPersonDetails(id, callback)
     }
 
     override fun saveToHistory(history: History) {

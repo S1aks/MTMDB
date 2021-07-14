@@ -8,4 +8,7 @@
     <string name="menuSearch">Поиск</string>
     <string name="settings_adult_check_text">Показывать фильмы для взрослых</string>
     <string name="menuHistory">История</string>
+    <string name="label_cast">Актёрский состав:</string>
+    <string name="label_person_birth_date">Дата рождения</string>
+    <string name="label_person_birth_place">Место рождения</string>
 </resources>
